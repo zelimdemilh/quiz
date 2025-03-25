@@ -1,11 +1,12 @@
 import { Button, Modal } from "antd";
 import { FC, useState } from "react";
 import { useDeleteQuestionMutation } from "../../sevices";
+import { DeleteOutlined } from "@ant-design/icons";
 
 interface IProps {
   id: string;
 }
-export const DeleteQuestion: FC<IProps> = ({ id }) => {
+export const QuestionDelete: FC<IProps> = ({ id }) => {
   const [deleteQuestions, { isSuccess, reset }] = useDeleteQuestionMutation();
   const [modalHidden, setModalHidden] = useState<boolean>(true);
 
@@ -27,9 +28,9 @@ export const DeleteQuestion: FC<IProps> = ({ id }) => {
   };
 
   return (
-    <div>
-      <Button type="text" className="py-0 m-0 h-full" onClick={onClickAction}>
-        x
+    <>
+      <Button type="text" className="p-2 m-0 h-full" onClick={onClickAction}>
+        <DeleteOutlined />
       </Button>
       <Modal
         open={!modalHidden}
@@ -51,6 +52,6 @@ export const DeleteQuestion: FC<IProps> = ({ id }) => {
       >
         Вопрос удален
       </Modal>
-    </div>
+    </>
   );
 };

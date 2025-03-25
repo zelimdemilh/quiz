@@ -1,4 +1,5 @@
 export * from "./AuthChecker";
 export * from "./Page";
 export * from "./SignOut";
-export * from "./DeleteQuestion";
+export * from "./QuestionDelete";
+export * from "./QuestionUpdate";

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- The Best Svg Icon site in the world: iconSvg.co, Visit us! https://iconsvg.co -->
+<svg id="svg" fill="#000000" stroke="#000000" width="200px" height="200px" version="1.1" viewBox="144 144 512 512" xmlns="http://www.w3.org/2000/svg">
+    <g id="IconSvg_bgCarrier" stroke-width="0"></g>
+    <g id="IconSvg_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC"></g>
+    <g id="IconSvg_iconCarrier">
+        <path xmlns="http://www.w3.org/2000/svg" d="m400 200.05c-110.24 0-199.95 89.707-199.95 199.95 0 110.24 89.707 199.95 199.95 199.95 110.24 0 199.95-89.711 199.95-199.95 0-110.24-89.711-199.95-199.95-199.95zm-168.46 199.95c0-92.891 75.57-168.46 168.46-168.46 33.945 0 65.465 10.297 91.945 27.648l-215.88 254.02c-27.363-30.012-44.523-69.5-44.523-113.2zm168.46 168.46c-37.848 0-72.422-13.004-100.61-34.164l217.14-255.46c31.867 30.703 51.926 73.555 51.926 121.17 0 92.887-75.574 168.46-168.46 168.46z"/>
+
+    </g>
+</svg>

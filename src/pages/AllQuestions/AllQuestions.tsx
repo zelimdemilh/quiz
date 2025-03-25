@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
 import { List, Card, Typography, Input } from "antd";
-import { DeleteQuestion, Page } from "../../components";
+import { QuestionDelete, Page, QuestionUpdate } from "../../components";
 import { useGetAllQuestionsQuery } from "../../sevices";
 
 export const AllQuestions = () => {
@@ -35,7 +35,10 @@ export const AllQuestions = () => {
                 title={
                   <div className="flex justify-between">
                     <div>{question.questionText}</div>
-                    <DeleteQuestion id={question._id} />
+                    <div>
+                      <QuestionDelete id={question._id} />
+                      <QuestionUpdate question={question} />
+                    </div>
                   </div>
                 }
               >

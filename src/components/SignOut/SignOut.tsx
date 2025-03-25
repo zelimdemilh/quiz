@@ -1,5 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import { Button } from "antd";
+import { LogoutOutlined } from "@ant-design/icons";
 
 export const SignOut = () => {
   const navigate = useNavigate();
@@ -15,7 +16,7 @@ export const SignOut = () => {
       className="text-base font-medium"
       onClick={handleSignOut}
     >
-      Выйти из аккаунта
+      <LogoutOutlined />
     </Button>
   );
 };

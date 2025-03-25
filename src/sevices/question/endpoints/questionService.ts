@@ -57,6 +57,7 @@ export const questionService = createApi({
         method: "PUT",
         body: arg,
       }),
+      invalidatesTags: ["question"],
     }),
     deleteQuestion: build.mutation<
       TDeleteQuestionApiResponse,

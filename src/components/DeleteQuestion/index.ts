@@ -1,1 +1,0 @@
-export { DeleteQuestion } from "./DeleteQuestion";
