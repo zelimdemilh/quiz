@@ -12,6 +12,7 @@ import { PrepareTypicalAuthUserHeaders } from "../../../lib";
 
 export const userService = createApi({
   reducerPath: "userApi",
+  tagTypes: ["user"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/client/`,
     prepareHeaders: PrepareTypicalAuthUserHeaders,

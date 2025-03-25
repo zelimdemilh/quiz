@@ -27,8 +27,7 @@ export const CreateQuestion: FC<IProps> = () => {
   };
 
   return (
-    <Page>
-      <h2 className="text-xl font-bold mb-4">Создать вопрос</h2>
+    <Page title="Создать вопрос">
       <Form
         form={form}
         layout="vertical"

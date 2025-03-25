@@ -11,10 +11,11 @@ import {
   TUpdateQuestionApiArg,
   TUpdateQuestionApiResponse,
 } from "../types";
-import {PrepareTypicalAuthUserHeaders} from "../../../lib";
+import { PrepareTypicalAuthUserHeaders } from "../../../lib";
 
 export const questionService = createApi({
   reducerPath: "questionApi",
+  tagTypes: ["question"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/question/`,
     prepareHeaders: PrepareTypicalAuthUserHeaders,
@@ -26,32 +27,46 @@ export const questionService = createApi({
         url: "",
         method: "GET",
       }),
+      providesTags: ["question"],
     }),
-    getOneQuestion: build.query<TGetOneQuestionApiResponse, TGetOneQuestionApiArg>({
+    getOneQuestion: build.query<
+      TGetOneQuestionApiResponse,
+      TGetOneQuestionApiArg
+    >({
       query: (id) => ({
         url: `${id}`,
         method: "GET",
       }),
     }),
-    createQuestion: build.mutation<TCreateQuestionApiResponse, TCreateQuestionApiArg>({
+    createQuestion: build.mutation<
+      TCreateQuestionApiResponse,
+      TCreateQuestionApiArg
+    >({
       query: (arg) => ({
         url: "",
         method: "POST",
         body: arg,
       }),
     }),
-    updateQuestion: build.mutation<TUpdateQuestionApiResponse, TUpdateQuestionApiArg>({
+    updateQuestion: build.mutation<
+      TUpdateQuestionApiResponse,
+      TUpdateQuestionApiArg
+    >({
       query: (arg) => ({
         url: `${arg.id}`,
         method: "PUT",
         body: arg,
       }),
     }),
-    deleteQuestion: build.mutation<TDeleteQuestionApiResponse, TDeleteQuestionApiArg>({
+    deleteQuestion: build.mutation<
+      TDeleteQuestionApiResponse,
+      TDeleteQuestionApiArg
+    >({
       query: (id) => ({
         url: `${id}`,
         method: "DELETE",
       }),
+      invalidatesTags: ["question"],
     }),
   }),
 });

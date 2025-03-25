@@ -5,15 +5,18 @@ import App from "./App.tsx";
 import { BrowserRouter } from "react-router-dom";
 import { setupStore } from "./store";
 import { Provider } from "react-redux";
+import { ConfigProvider } from "antd";
 
 const store = setupStore();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <App />
-      </Provider>
-    </BrowserRouter>
+    <ConfigProvider theme={{ token: {} }}>
+      <BrowserRouter>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </BrowserRouter>
+    </ConfigProvider>
   </StrictMode>,
 );
