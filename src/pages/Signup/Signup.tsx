@@ -1,13 +1,14 @@
-import { FC, useEffect } from "react";
-import type { FormProps } from "antd";
+import {FC, useEffect} from "react";
+import {FormProps, Modal} from "antd";
 import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUserSignUpMutation } from "../../sevices";
-import { TUserSignUpApiArg } from "../../sevices/user";
+import { TUserSignUpApiArg } from "../../sevices";
 import { useNavigate } from "react-router-dom";
+import {Page} from "../../components";
 
 export const Signup: FC = () => {
-  const [userSignUp, { error, isSuccess }] = useUserSignUpMutation();
+  const [userSignUp, { error, isSuccess, reset }] = useUserSignUpMutation();
   const [form] = useForm<TUserSignUpApiArg>();
   const navigate = useNavigate();
 
@@ -16,11 +17,10 @@ export const Signup: FC = () => {
     await userSignUp(values);
   };
 
-  useEffect(() => {
-    if (isSuccess) {
-      navigate("/auth");
-    }
-  }, [isSuccess]);
+  const onCloseModal = () => {
+    reset()
+    navigate("/auth");
+  }
 
   useEffect(() => {
     // @ts-ignore
@@ -30,17 +30,11 @@ export const Signup: FC = () => {
   }, [error]);
 
   return (
-    <div className="flex justify-center h-full items-center">
+    <Page className="flex justify-center h-full items-center">
       <Form<TUserSignUpApiArg>
         form={form}
         onFinish={onFinish}
         autoComplete="off"
-        initialValues={{
-          firstname: "123",
-          lastname: "123",
-          username: "123",
-          password: "123",
-        }}
       >
         <Form.Item
           label="Имя"
@@ -87,6 +81,9 @@ export const Signup: FC = () => {
           </Button>
         </Form.Item>
       </Form>
-    </div>
+      <Modal open={isSuccess} cancelText={'Закрыть'} okText={'Ок'} onCancel={onCloseModal} onOk={onCloseModal} title='Регистраыия прошла успешно'>
+        Пользователь добавлен
+      </Modal>
+    </Page>
   );
 };

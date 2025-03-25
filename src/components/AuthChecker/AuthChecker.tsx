@@ -1,30 +1,43 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useLazyGetClientByTokenQuery } from "../../sevices";
-import { useAppSelector } from "../../hooks";
+import { useLazyGetClientByTokenQuery } from "../../sevices"; // Обновить путь к запросам
 
 export const AuthChecker = () => {
   const navigate = useNavigate();
-  const userId = useAppSelector((state) => state.userSlice.id);
   const [getClientByToken] = useLazyGetClientByTokenQuery();
 
   useEffect(() => {
     const checkAuth = async () => {
       const user = localStorage.getItem("user");
 
-      if (!user) {
-        navigate("/auth");
-        return;
-      }
+      // Если пользователь уже авторизован
+      if (user) {
+        const parsedUser = JSON.parse(user);
 
-      const parsedUser = JSON.parse(user);
+        try {
+          // Проверка действительности токена
+          await getClientByToken({ id: parsedUser.id }).unwrap();
 
-      try {
-        await getClientByToken({ id: parsedUser.id }).unwrap();
-      } catch (error) {
-        console.error("Ошибка проверки токена:", error);
-        localStorage.removeItem("user");
-        navigate("/auth");
+          // Если пользователь авторизован, редиректим его на главную или личный кабинет
+          if (
+            window.location.pathname === "/auth" ||
+            window.location.pathname === "/signup"
+          ) {
+            navigate("/"); // или другой защищенный путь
+          }
+        } catch (error) {
+          console.error("Ошибка проверки токена:", error);
+          localStorage.removeItem("user"); // Если ошибка с токеном, удаляем его
+          navigate("/auth");
+        }
+      } else {
+        // Если пользователь не авторизован и пытается попасть на защищенную страницу
+        if (
+          window.location.pathname !== "/auth" &&
+          window.location.pathname !== "/signup"
+        ) {
+          navigate("/auth");
+        }
       }
     };
 

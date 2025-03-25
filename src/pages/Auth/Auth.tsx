@@ -4,6 +4,7 @@ import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUserSignInMutation } from "../../sevices";
 import { useNavigate } from "react-router-dom";
+import {Page} from "../../components";
 
 export const Auth: FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -37,7 +38,7 @@ export const Auth: FC = () => {
   }, [resError]);
 
   return (
-    <div className="flex justify-center h-full items-center bg-red-500">
+    <Page className="flex justify-center h-full items-center">
       <Form
         form={form}
         className="w-[300px]"
@@ -72,6 +73,6 @@ export const Auth: FC = () => {
         </Form.Item>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </Form>
-    </div>
+    </Page>
   );
 };

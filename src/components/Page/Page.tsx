@@ -1,15 +1,17 @@
 import { FC, ReactNode } from "react";
+import clsx from "clsx";
 
 interface IPageProps {
   children?: ReactNode;
   title?: string;
+  className?: string
 }
 
-export const Page: FC<IPageProps> = ({ children, title }) => {
+export const Page: FC<IPageProps> = ({ children, title, className }) => {
   return (
-    <div className="p-1">
-      {title && <p className="text-lg text-red-500">{title}</p>}
-      <div className="max-">{children}</div>
+    <div className={clsx(className, "px-2")}>
+      {title && <p className="text-3xl">{title}</p>}
+      <div className="">{children}</div>
     </div>
   );
 };
