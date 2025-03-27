@@ -6,3 +6,4 @@ export * from "./CreateQuestion";
 export * from "./AllQuestions";
 export * from "./CreateTest";
 export * from "./AllTests";
+export * from "./QuizPage";

@@ -3,8 +3,8 @@ import type { FormProps } from "antd";
 import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUserSignInMutation } from "../../sevices";
-import { useNavigate } from "react-router-dom";
-import {Page} from "../../components";
+import { Link, useNavigate } from "react-router-dom";
+import { Page } from "../../components";
 
 export const Auth: FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -67,9 +67,9 @@ export const Auth: FC = () => {
           <Button type="primary" htmlType="submit">
             Войти
           </Button>
-          <Button type="link" href="/signup">
-            Регистрация
-          </Button>
+          <Link to="/signup">
+            <Button type="link">Регистрация</Button>
+          </Link>
         </Form.Item>
         {error && <p style={{ color: "red" }}>{error}</p>}
       </Form>

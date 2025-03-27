@@ -1,11 +1,11 @@
-import {FC, useEffect} from "react";
-import {FormProps, Modal} from "antd";
+import { FC, useEffect } from "react";
+import { FormProps, Modal } from "antd";
 import { Button, Form, Input } from "antd";
 import { useForm } from "antd/es/form/Form";
 import { useUserSignUpMutation } from "../../sevices";
 import { TUserSignUpApiArg } from "../../sevices";
-import { useNavigate } from "react-router-dom";
-import {Page} from "../../components";
+import { Link, useNavigate } from "react-router-dom";
+import { Page } from "../../components";
 
 export const Signup: FC = () => {
   const [userSignUp, { error, isSuccess, reset }] = useUserSignUpMutation();
@@ -18,9 +18,9 @@ export const Signup: FC = () => {
   };
 
   const onCloseModal = () => {
-    reset()
+    reset();
     navigate("/auth");
-  }
+  };
 
   useEffect(() => {
     // @ts-ignore
@@ -76,12 +76,19 @@ export const Signup: FC = () => {
           <Button type="primary" htmlType="submit">
             Зарегистрироваться
           </Button>
-          <Button type="link" href="/auth">
-            Войти
-          </Button>
+          <Link to="/auth">
+            <Button type="link">Войти</Button>
+          </Link>
         </Form.Item>
       </Form>
-      <Modal open={isSuccess} cancelText={'Закрыть'} okText={'Ок'} onCancel={onCloseModal} onOk={onCloseModal} title='Регистраыия прошла успешно'>
+      <Modal
+        open={isSuccess}
+        cancelText={"Закрыть"}
+        okText={"Ок"}
+        onCancel={onCloseModal}
+        onOk={onCloseModal}
+        title="Регистраыия прошла успешно"
+      >
         Пользователь добавлен
       </Modal>
     </Page>

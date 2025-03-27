@@ -9,12 +9,12 @@ const App = () => {
 
   return (
     <div className="max-w-[900px] h-dvh">
-      <AuthChecker/>
+      <AuthChecker />
       <Routes>
-        {routesToRender(role).map(({path, element}) => (
-          <Route key={path} path={path} element={element}/>
+        {routesToRender(role).map(({ path, element }) => (
+          <Route key={path} path={path} element={element} />
         ))}
-        <Route path="*" element={<NotFound/>}/>
+        <Route path="*" element={<NotFound />} />
       </Routes>
     </div>
   );

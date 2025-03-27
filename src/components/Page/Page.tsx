@@ -12,7 +12,7 @@ export const Page: FC<IPageProps> = ({ children, title, className }) => {
   return (
     <div className={clsx(className, "px-2")}>
       {title && (
-        <h2 className="text-xl font-bold mb-2">
+        <h2 className="text-xl font-bold mb-2 p-2">
           <NavLink to="/">{title}</NavLink>
         </h2>
       )}

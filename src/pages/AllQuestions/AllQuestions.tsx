@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import { List, Card, Typography, Input } from "antd";
-import { QuestionDelete, Page, QuestionUpdate } from "../../components";
+import { List, Card, Input } from "antd";
+import { QuestionDelete, Page, QuestionUpdate, Loader } from "../../components";
 import { useGetAllQuestionsQuery } from "../../sevices";
 
 export const AllQuestions = () => {
@@ -24,7 +24,7 @@ export const AllQuestions = () => {
       />
 
       {isLoading ? (
-        <Typography.Text>Загрузка...</Typography.Text>
+        <Loader />
       ) : (
         <List
           grid={{ gutter: 16, column: 1 }}

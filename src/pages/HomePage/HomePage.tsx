@@ -19,7 +19,7 @@ export const HomePage: FC = () => {
       }
     >
       <div>
-        <NavLink to="#">
+        <NavLink to="/tests">
           <Button className="p-0" type="link">
             Пройти тест
           </Button>
@@ -48,13 +48,13 @@ export const HomePage: FC = () => {
               </Button>
             </NavLink>
           </div>
-          <div>
-            <NavLink to="/tests">
-              <Button className="p-0" type="link">
-                Все тесты
-              </Button>
-            </NavLink>
-          </div>
+          {/*<div>*/}
+          {/*  <NavLink to="/tests">*/}
+          {/*    <Button className="p-0" type="link">*/}
+          {/*      Все тесты*/}
+          {/*    </Button>*/}
+          {/*  </NavLink>*/}
+          {/*</div>*/}
         </div>
       )}
     </Page>

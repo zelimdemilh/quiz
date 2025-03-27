@@ -1,5 +1,5 @@
 import { EditOutlined } from "@ant-design/icons";
-import { Button, Modal, message, Form } from "antd";
+import { Button, Modal, message } from "antd";
 import { FC, useEffect, useState } from "react";
 import {
   TCreateTestApiArg,
@@ -8,6 +8,7 @@ import {
 } from "../../sevices";
 import { ITest } from "../../types";
 import { TestForm } from "../TestForm";
+import { useForm } from "antd/es/form/Form";
 
 interface IProps {
   test: ITest;
@@ -18,22 +19,27 @@ export const TestUpdate: FC<IProps> = ({ test }) => {
   const { data: questions, isLoading } = useGetAllQuestionsQuery();
   const [modalHidden, setModalHidden] = useState<boolean>(true);
   const [formData, setFormData] = useState<Partial<TCreateTestApiArg>>({});
-  const [form] = Form.useForm();
+  const [form] = useForm();
 
   const onClickAction = () => {
     setModalHidden(false);
   };
   const onCloseModal = () => {
     setModalHidden(true);
+    form.setFieldsValue({
+      title: test.title,
+      description: test.description,
+      questions: test.questions.map((q) => q._id),
+    });
   };
 
   useEffect(() => {
     if (test) {
-      form.setFields([
-        { name: "title", value: test.title },
-        { name: "description", value: test.description },
-        { name: "questions", value: test.questions.map((q) => q._id) },
-      ]);
+      form.setFieldsValue({
+        title: test.title,
+        description: test.description,
+        questions: test.questions.map((q) => q._id),
+      });
     }
   }, [form, test]);
 
