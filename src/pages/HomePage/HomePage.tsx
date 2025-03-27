@@ -42,9 +42,16 @@ export const HomePage: FC = () => {
             </NavLink>
           </div>
           <div>
-            <NavLink to="#">
+            <NavLink to="/test/create">
               <Button className="p-0" type="link">
                 Создать тест
+              </Button>
+            </NavLink>
+          </div>
+          <div>
+            <NavLink to="/tests">
+              <Button className="p-0" type="link">
+                Все тесты
               </Button>
             </NavLink>
           </div>

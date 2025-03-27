@@ -1,15 +1,15 @@
 import { Button, message, Modal } from "antd";
 import { FC, useState } from "react";
-import { useDeleteQuestionMutation } from "../../sevices";
+import { useDeleteTestMutation } from "../../sevices";
 import { DeleteOutlined } from "@ant-design/icons";
 
 interface IProps {
   id: string;
 }
 
-export const QuestionDelete: FC<IProps> = ({ id }) => {
-  const [deleteQuestion] = useDeleteQuestionMutation();
-  const [modalVisible, setModalVisible] = useState<boolean>(false);
+export const TestDelete: FC<IProps> = ({ id }) => {
+  const [deleteTest] = useDeleteTestMutation();
+  const [modalVisible, setModalVisible] = useState(false);
 
   const onClickAction = () => {
     setModalVisible(true);
@@ -19,13 +19,13 @@ export const QuestionDelete: FC<IProps> = ({ id }) => {
     setModalVisible(false);
   };
 
-  const deleteQuestionAction = async () => {
+  const deleteTestAction = async () => {
     try {
-      await deleteQuestion(id).unwrap();
-      message.success("Вопрос удалён");
+      await deleteTest(id).unwrap();
+      message.success("Тест удалён");
       onCloseModal();
     } catch {
-      message.error("Ошибка при удалении вопроса");
+      message.error("Ошибка при удалении теста");
     }
   };
 
@@ -37,13 +37,13 @@ export const QuestionDelete: FC<IProps> = ({ id }) => {
 
       <Modal
         open={modalVisible}
-        title="Удаление вопроса"
+        title="Удаление теста"
         okText="Да"
         cancelText="Отменить"
-        onOk={deleteQuestionAction}
+        onOk={deleteTestAction}
         onCancel={onCloseModal}
       >
-        Вы уверены, что хотите удалить вопрос?
+        Вы уверены, что хотите удалить тест?
       </Modal>
     </>
   );

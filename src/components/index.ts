@@ -3,3 +3,7 @@ export * from "./Page";
 export * from "./SignOut";
 export * from "./QuestionDelete";
 export * from "./QuestionUpdate";
+export * from "./TestDelete";
+export * from "./TestUpdate";
+export * from "./QuestionForm";
+export * from "./TestForm";

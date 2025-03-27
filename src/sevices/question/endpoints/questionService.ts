@@ -15,7 +15,7 @@ import { PrepareTypicalAuthUserHeaders } from "../../../lib";
 
 export const questionService = createApi({
   reducerPath: "questionApi",
-  tagTypes: ["question"],
+  tagTypes: ["question", "test"],
   baseQuery: fetchBaseQuery({
     baseUrl: `${BASE_URL}/question/`,
     prepareHeaders: PrepareTypicalAuthUserHeaders,
@@ -37,6 +37,7 @@ export const questionService = createApi({
         url: `${id}`,
         method: "GET",
       }),
+      providesTags: ["question"],
     }),
     createQuestion: build.mutation<
       TCreateQuestionApiResponse,
@@ -47,6 +48,7 @@ export const questionService = createApi({
         method: "POST",
         body: arg,
       }),
+      invalidatesTags: ["question", "test"],
     }),
     updateQuestion: build.mutation<
       TUpdateQuestionApiResponse,
@@ -57,7 +59,7 @@ export const questionService = createApi({
         method: "PUT",
         body: arg,
       }),
-      invalidatesTags: ["question"],
+      invalidatesTags: ["question", "test"],
     }),
     deleteQuestion: build.mutation<
       TDeleteQuestionApiResponse,
@@ -67,7 +69,7 @@ export const questionService = createApi({
         url: `${id}`,
         method: "DELETE",
       }),
-      invalidatesTags: ["question"],
+      invalidatesTags: ["question", "test"],
     }),
   }),
 });

@@ -1,0 +1,1 @@
+export { TestDelete } from "./TestDelete";

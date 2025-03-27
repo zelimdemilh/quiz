@@ -6,12 +6,16 @@ import {
   userControllerMiddleware,
   questionControllerReducer,
   questionControllerReducerPath,
-  questionControllerMiddleware
+  questionControllerMiddleware,
+  testControllerReducerPath,
+  testControllerReducer,
+  testControllerMiddleware,
 } from "../sevices";
 
 const rootReducer = combineReducers({
   [userControllerReducerPath]: userControllerReducer,
   [questionControllerReducerPath]: questionControllerReducer,
+  [testControllerReducerPath]: testControllerReducer,
   userSlice: userReducer,
 });
 
@@ -19,7 +23,11 @@ export const setupStore = () => {
   return configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(userControllerMiddleware, questionControllerMiddleware),
+      getDefaultMiddleware().concat(
+        userControllerMiddleware,
+        questionControllerMiddleware,
+        testControllerMiddleware,
+      ),
   });
 };
 

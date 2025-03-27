@@ -1,53 +1,38 @@
-import { Button, Modal, Form, Input, Space, Select } from "antd";
+import { Button, message, Modal } from "antd";
 import { FC, useState } from "react";
 import { useUpdateQuestionMutation } from "../../sevices";
 import { IQuestion } from "../../types";
 import { EditOutlined } from "@ant-design/icons";
+import { QuestionForm } from "../QuestionForm";
+import { useForm } from "antd/es/form/Form";
 
 interface IProps {
   question: IQuestion;
 }
 
 export const QuestionUpdate: FC<IProps> = ({ question }) => {
-  const {
-    questionText,
-    options: currentOptions,
-    correctAnswer,
-    _id: id,
-  } = question;
-
-  const [updateQuestion, { isSuccess, reset }] = useUpdateQuestionMutation();
-  const [modalHidden, setModalHidden] = useState<boolean>(true);
-  const [form] = Form.useForm();
+  const [updateQuestion] = useUpdateQuestionMutation();
+  const [modalVisible, setModalVisible] = useState<boolean>(false);
+  const [formData, setFormData] = useState<Partial<IQuestion>>({});
+  const [form] = useForm();
 
   const onClickAction = () => {
-    form.setFieldsValue({
-      questionText,
-      options: currentOptions,
-      correctAnswer,
-    });
-    setModalHidden(false);
+    setModalVisible(true);
   };
 
   const onCloseModal = () => {
-    setModalHidden(true);
+    setModalVisible(false);
   };
-
-  const options = Form.useWatch<string[]>("options", form) || [];
 
   const updateQuestionAction = async () => {
     try {
-      const values = await form.validateFields();
-
-      await updateQuestion({ id, ...values }).unwrap();
+      await updateQuestion({ id: question._id, ...formData }).unwrap();
+      message.success("Вопрос успешно обновлён");
       onCloseModal();
     } catch (error) {
       console.error("Ошибка обновления:", error);
+      message.error("Ошибка при обновлении вопроса");
     }
-  };
-
-  const onCloseFinishModal = () => {
-    reset();
   };
 
   return (
@@ -57,89 +42,18 @@ export const QuestionUpdate: FC<IProps> = ({ question }) => {
       </Button>
 
       <Modal
-        open={!modalHidden}
+        open={modalVisible}
         title="Редактировать вопрос"
         okText="Сохранить"
         cancelText="Отмена"
         onOk={updateQuestionAction}
         onCancel={onCloseModal}
       >
-        <Form form={form} layout="vertical">
-          <Form.Item
-            label="Текст вопроса"
-            name="questionText"
-            rules={[{ required: true, message: "Введите текст вопроса" }]}
-          >
-            <Input />
-          </Form.Item>
-
-          <Form.List name="options">
-            {(fields, { add, remove }) => (
-              <>
-                {fields.map(({ key, name, ...restField }) => (
-                  <Space
-                    key={key}
-                    style={{ display: "flex", marginBottom: 8 }}
-                    align="baseline"
-                  >
-                    <Form.Item
-                      {...restField}
-                      name={[name]}
-                      rules={[
-                        { required: true, message: "Введите вариант ответа" },
-                      ]}
-                    >
-                      <Input placeholder={`Вариант ${name + 1}`} />
-                    </Form.Item>
-                    {fields.length > 2 && (
-                      <Button type="link" danger onClick={() => remove(name)}>
-                        Удалить
-                      </Button>
-                    )}
-                  </Space>
-                ))}
-                <Button type="dashed" onClick={() => add()} block>
-                  Добавить вариант ответа
-                </Button>
-              </>
-            )}
-          </Form.List>
-
-          <Form.Item
-            label="Правильный ответ"
-            name="correctAnswer"
-            rules={[
-              { required: true, message: "Выберите правильный ответ" },
-              {
-                validator: (_, value) => {
-                  if (!options.includes(value)) {
-                    return Promise.reject(new Error("Такого варианта нет"));
-                  }
-                  return Promise.resolve();
-                },
-              },
-            ]}
-          >
-            <Select placeholder="Выберите правильный вариант">
-              {options.map((option, index) => (
-                <Select.Option key={index} value={option}>
-                  {option}
-                </Select.Option>
-              ))}
-            </Select>
-          </Form.Item>
-        </Form>
-      </Modal>
-
-      <Modal
-        open={isSuccess}
-        cancelText="Закрыть"
-        okText="Ок"
-        onCancel={onCloseFinishModal}
-        onOk={onCloseFinishModal}
-        title="Обновление прошло успешно"
-      >
-        Вопрос обновлён
+        <QuestionForm
+          form={form}
+          question={question}
+          onValuesChange={setFormData}
+        />
       </Modal>
     </>
   );

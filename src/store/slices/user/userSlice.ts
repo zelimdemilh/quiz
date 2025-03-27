@@ -7,20 +7,19 @@ interface UserState {
   token: string | null;
 }
 
-const loadUserFromLocalStorage = (): UserState => {
-  const storedUser = localStorage.getItem("user");
-  if (storedUser) {
-    return JSON.parse(storedUser);
-  }
-  return { id: null, role: null, token: null };
-};
-
-const initialState: UserState = loadUserFromLocalStorage();
+const initialState: UserState = { id: null, role: null, token: null };
 
 const userSlice = createSlice({
   name: "userSlice",
   initialState,
-  reducers: {},
+  reducers: {
+    signOut: (state) => {
+      state.id = null;
+      state.role = null;
+      state.token = null;
+      localStorage.removeItem("user");
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addMatcher(
@@ -38,5 +37,7 @@ const userSlice = createSlice({
       );
   },
 });
+
+export const { signOut } = userSlice.actions;
 
 export const userReducer = userSlice.reducer;
