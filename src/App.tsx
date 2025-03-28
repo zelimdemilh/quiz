@@ -1,4 +1,4 @@
-import { Route, Routes } from "react-router-dom";
+import { HashRouter as Route, Routes } from "react-router-dom";
 import { NotFound } from "./pages";
 import { AuthChecker } from "./components";
 import { routesToRender } from "./routes";
@@ -12,9 +12,9 @@ const App = () => {
       <AuthChecker />
       <Routes>
         {routesToRender(role).map(({ path, element }) => (
-          <Route key={path} path={path} element={element} />
+          <Route key={path} basename={path} children={element} />
         ))}
-        <Route path="*" element={<NotFound />} />
+        <Route basename="*" children={<NotFound />} />
       </Routes>
     </div>
   );
