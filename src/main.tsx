@@ -11,7 +11,7 @@ const store = setupStore();
 
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
-    <BrowserRouter>
+    <BrowserRouter basename={"/quiz"}>
       <Provider store={store}>
         <App />
       </Provider>
