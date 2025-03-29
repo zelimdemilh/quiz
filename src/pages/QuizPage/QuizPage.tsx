@@ -58,7 +58,9 @@ export const QuizPage = () => {
     <Page title={`Тест: ${testData?.title}`}>
       <Card title={`Вопрос ${current + 1}/${questions.length}`}>
         <p>{questions[current].questionText}</p>
-        <Progress percent={((current + 1) / questions.length) * 100} />
+        <Progress
+          percent={Math.floor(((current + 1) / questions.length) * 100)}
+        />
         {questions[current].options.map((option) => (
           <Button
             key={option}

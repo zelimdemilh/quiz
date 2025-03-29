@@ -39,14 +39,16 @@ export const AuthChecker = () => {
           localStorage.removeItem("user");
           navigate("/auth");
         }
-      } else {
-        if (
-          window.location.pathname !== "/auth" &&
-          window.location.pathname !== "/signup"
-        ) {
-          navigate("/auth");
-        }
       }
+      // else {
+      //   if (
+      //     window.location.pathname !== "/auth" &&
+      //     window.location.pathname !== "/signup"
+      //   ) {
+      //     console.log(1);
+      //     navigate("/auth");
+      //   }
+      // }
     };
 
     checkAuth();
