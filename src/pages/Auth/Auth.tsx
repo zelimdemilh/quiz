@@ -1,10 +1,11 @@
-import { FC, useEffect, useState } from "react";
-import type { FormProps } from "antd";
-import { Button, Form, Input } from "antd";
-import { useForm } from "antd/es/form/Form";
-import { useUserSignInMutation } from "../../sevices";
-import { Link, useNavigate } from "react-router-dom";
-import { Page } from "../../components";
+import { FC, useEffect, useState } from 'react';
+import type { FormProps } from 'antd';
+import { Button, Form, Input } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { useUserSignInMutation } from '@shared/api';
+import { Page } from '@shared/ui';
 
 export const Auth: FC = () => {
   const [error, setError] = useState<string | null>(null);
@@ -12,7 +13,7 @@ export const Auth: FC = () => {
   const navigate = useNavigate();
   const [form] = useForm();
 
-  const onFinish: FormProps["onFinish"] = async () => {
+  const onFinish: FormProps['onFinish'] = async () => {
     const values = await form.validateFields({ validateOnly: false });
     await userSignIn(values).unwrap();
     setError(null);
@@ -20,17 +21,17 @@ export const Auth: FC = () => {
 
   useEffect(() => {
     if (isSuccess) {
-      navigate("/");
+      navigate('/');
     }
   }, [isSuccess, navigate]);
 
   useEffect(() => {
     // @ts-ignore
     if (resError?.status === 401) {
-      setError("Неверный логин или пароль");
+      setError('Неверный логин или пароль');
       form.setFields([
-        { name: "username", errors: [" "] },
-        { name: "password", errors: [" "] },
+        { name: 'username', errors: [' '] },
+        { name: 'password', errors: [' '] },
       ]);
     } else {
       setError(null);
@@ -39,27 +40,22 @@ export const Auth: FC = () => {
 
   return (
     <Page className="flex justify-center h-full items-center">
-      <Form
-        form={form}
-        className="w-[300px]"
-        onFinish={onFinish}
-        autoComplete="off"
-      >
+      <Form form={form} className="w-[300px]" onFinish={onFinish} autoComplete="off">
         <Form.Item
           label="Логин"
-          labelCol={{ span: 6, style: { textAlign: "start" } }}
+          labelCol={{ span: 6, style: { textAlign: 'start' } }}
           wrapperCol={{ span: 18 }}
           name="username"
-          rules={[{ required: true, message: "Введите логин" }]}
+          rules={[{ required: true, message: 'Введите логин' }]}
         >
           <Input />
         </Form.Item>
         <Form.Item
           label="Пароль"
-          labelCol={{ span: 6, style: { textAlign: "start" } }}
+          labelCol={{ span: 6, style: { textAlign: 'start' } }}
           wrapperCol={{ span: 18 }}
           name="password"
-          rules={[{ required: true, message: "Введите пароль" }]}
+          rules={[{ required: true, message: 'Введите пароль' }]}
         >
           <Input.Password />
         </Form.Item>
@@ -71,7 +67,7 @@ export const Auth: FC = () => {
             <Button type="link">Регистрация</Button>
           </Link>
         </Form.Item>
-        {error && <p style={{ color: "red" }}>{error}</p>}
+        {error && <p style={{ color: 'red' }}>{error}</p>}
       </Form>
     </Page>
   );

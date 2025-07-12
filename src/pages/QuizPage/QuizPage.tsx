@@ -1,9 +1,11 @@
-import { useState } from "react";
-import { Button, Card, Progress } from "antd";
-import { Loader, Page, TestResult } from "../../components";
-import { useGetOneTestQuery } from "../../sevices";
-import { useParams } from "react-router-dom";
-import clsx from "clsx";
+import clsx from 'clsx';
+import { useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { Button, Card, Progress } from 'antd';
+
+import { TestResult } from '@entities/tests';
+import { useGetOneTestQuery } from '@shared/api';
+import { Loader, Page } from '@shared/ui';
 
 export const QuizPage = () => {
   const [current, setCurrent] = useState(0);
@@ -15,7 +17,7 @@ export const QuizPage = () => {
   const questions = testData?.questions || [];
 
   const handleAnswer = (answer: string) => {
-    setAnswers((prev) => ({ ...prev, [current]: answer }));
+    setAnswers(prev => ({ ...prev, [current]: answer }));
   };
 
   const nextQuestion = () => {
@@ -27,7 +29,7 @@ export const QuizPage = () => {
   };
 
   const correctCount = Object.entries(answers).filter(
-    ([index, answer]) => questions[Number(index)].correctAnswer === answer,
+    ([index, answer]) => questions[Number(index)].correctAnswer === answer
   ).length;
 
   const restart = () => {
@@ -58,20 +60,16 @@ export const QuizPage = () => {
     <Page title={`Тест: ${testData?.title}`}>
       <Card title={`Вопрос ${current + 1}/${questions.length}`}>
         <p>{questions[current].questionText}</p>
-        <Progress
-          percent={Math.floor(((current + 1) / questions.length) * 100)}
-        />
-        {questions[current].options.map((option) => (
+        <Progress percent={Math.floor(((current + 1) / questions.length) * 100)} />
+        {questions[current].options.map(option => (
           <Button
             key={option}
             className={clsx(
-              "block mt-2",
+              'block mt-2',
               answers[current] && {
-                "!bg-green-400": option === questions[current].correctAnswer,
-                "!bg-red-200":
-                  answers[current] === option &&
-                  option !== questions[current].correctAnswer,
-              },
+                '!bg-green-400': option === questions[current].correctAnswer,
+                '!bg-red-200': answers[current] === option && option !== questions[current].correctAnswer,
+              }
             )}
             onClick={() => !answers[current] && handleAnswer(option)}
             disabled={!!answers[current]}

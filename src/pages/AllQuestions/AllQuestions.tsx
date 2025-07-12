@@ -1,17 +1,17 @@
-import { useState, useMemo } from "react";
-import { List, Card, Input } from "antd";
-import { QuestionDelete, Page, QuestionUpdate, Loader } from "../../components";
-import { useGetAllQuestionsQuery } from "../../sevices";
+import { useState, useMemo } from 'react';
+import { List, Card, Input } from 'antd';
+import { Page, Loader } from '@shared/ui';
+
+import { useGetAllQuestionsQuery } from '@shared/api';
+import { QuestionDelete, QuestionUpdate } from '@entities/questions';
 
 export const AllQuestions = () => {
   const { data: questions, isLoading } = useGetAllQuestionsQuery();
-  const [searchTerm, setSearchTerm] = useState("");
+  const [searchTerm, setSearchTerm] = useState('');
 
   const filteredQuestions = useMemo(() => {
     if (!questions) return [];
-    return questions.filter((question) =>
-      question.questionText.toLowerCase().includes(searchTerm.toLowerCase()),
-    );
+    return questions.filter(question => question.questionText.toLowerCase().includes(searchTerm.toLowerCase()));
   }, [questions, searchTerm]);
 
   return (
@@ -19,7 +19,7 @@ export const AllQuestions = () => {
       <Input.Search
         placeholder="Поиск вопросов..."
         allowClear
-        onChange={(e) => setSearchTerm(e.target.value)}
+        onChange={e => setSearchTerm(e.target.value)}
         className="mb-4"
       />
 
@@ -29,7 +29,7 @@ export const AllQuestions = () => {
         <List
           grid={{ gutter: 16, column: 1 }}
           dataSource={filteredQuestions}
-          renderItem={(question) => (
+          renderItem={question => (
             <List.Item>
               <Card
                 title={
@@ -46,7 +46,7 @@ export const AllQuestions = () => {
                   {question.options.map((option: string, index: number) => (
                     <li key={index}>
                       {option}
-                      {option === question.correctAnswer ? " ✅" : ""}
+                      {option === question.correctAnswer ? ' ✅' : ''}
                     </li>
                   ))}
                 </ul>

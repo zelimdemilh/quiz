@@ -1,11 +1,12 @@
-import { FC } from "react";
-import { Page, SignOut } from "../../components";
-import { Button } from "antd";
-import { NavLink } from "react-router-dom";
-import { useAppSelector } from "../../hooks";
+import { Button } from 'antd';
+import { FC } from 'react';
+import { NavLink } from 'react-router-dom';
+
+import { SignOut, useGetUser } from '@entities/users';
+import { Page } from '@shared/ui';
 
 export const HomePage: FC = () => {
-  const role = useAppSelector((state) => state.userSlice.role);
+  const { role } = useGetUser();
 
   return (
     <Page
@@ -25,7 +26,7 @@ export const HomePage: FC = () => {
           </Button>
         </NavLink>
       </div>
-      {role === "admin" && (
+      {role === 'admin' && (
         <div>
           <div>
             <NavLink to="/questions">
@@ -48,13 +49,13 @@ export const HomePage: FC = () => {
               </Button>
             </NavLink>
           </div>
-          {/*<div>*/}
-          {/*  <NavLink to="/tests">*/}
-          {/*    <Button className="p-0" type="link">*/}
-          {/*      Все тесты*/}
-          {/*    </Button>*/}
-          {/*  </NavLink>*/}
-          {/*</div>*/}
+          {/* <div> */}
+          {/*  <NavLink to="/tests"> */}
+          {/*    <Button className="p-0" type="link"> */}
+          {/*      Все тесты */}
+          {/*    </Button> */}
+          {/*  </NavLink> */}
+          {/* </div> */}
         </div>
       )}
     </Page>

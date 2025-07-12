@@ -1,1 +1,0 @@
-export type {IQuestion} from './IQuestion.ts'

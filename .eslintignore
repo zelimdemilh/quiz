@@ -1,0 +1,14 @@
+node_modules
+.DS_Store
+*.local
+.vscode
+package-lock.json
+build
+coverage
+generated
+scripts/worker.ts
+/tmp
+/tmp.js
+/src/entities/tmp
+scripts
+config

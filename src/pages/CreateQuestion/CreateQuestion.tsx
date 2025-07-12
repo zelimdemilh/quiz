@@ -1,11 +1,10 @@
-import { FC, useState } from "react";
-import { Button, message } from "antd";
-import { Page, QuestionForm } from "../../components";
-import {
-  TCreateQuestionApiArg,
-  useCreateQuestionMutation,
-} from "../../sevices";
-import { useForm } from "antd/es/form/Form";
+import { FC, useState } from 'react';
+import { Button, message } from 'antd';
+import { useForm } from 'antd/es/form/Form';
+
+import { TCreateQuestionApiArg, useCreateQuestionMutation } from '@shared/api';
+import { Page } from '@shared/ui';
+import { QuestionForm } from '@entities/questions';
 
 interface IProps {
   className?: string;
@@ -22,9 +21,9 @@ export const CreateQuestion: FC<IProps> = () => {
     try {
       await createQuestion(values);
       form.resetFields();
-      message.success("Вопрос успешно создан");
+      message.success('Вопрос успешно создан');
     } catch {
-      return message.error("Какая ошибка");
+      return message.error('Какая ошибка');
     }
   };
 
