@@ -3,6 +3,7 @@ import { ReactElement, Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
 import { Loader } from '@shared/ui';
+
 import Routing from '../../../routing';
 
 export const NoAccessLayout = (): ReactElement => (

@@ -12,7 +12,7 @@ interface IAuthProvider {
   children: ReactNode;
 }
 
-const EXCLUDED_URLS = ['/login', '/authenticate', '/logout'];
+const EXCLUDED_URLS = ['/auth', '/logout'];
 
 export const AuthContext = createContext<IAuthContext>({} as IAuthContext);
 
@@ -37,7 +37,6 @@ const AuthProvider = ({ children }: IAuthProvider): ReactElement => {
       window.location.href = redirectUrl;
     }
   }, [token, pathname]);
-
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 };
 

@@ -1,10 +1,10 @@
 import { compose } from '@reduxjs/toolkit';
 
 import withAntAppContext from './with-ant-app-context';
+import withAuthentication from './with-authentication';
 import withErrorBoundary from './with-error-boundary';
 import withStore from './with-store';
-import withAuthentication from './withAuthentication';
-import withVitePreloadError from './withVitePreloadError';
+import withVitePreloadError from './with-vite-preloadError';
 
 const withProviders = compose(
   withVitePreloadError,

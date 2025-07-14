@@ -1,4 +1,5 @@
 import { BaseQueryApi } from '@reduxjs/toolkit/query';
+
 import { TUserSignInApiResponse } from '../../sevices/user/types/apiArg';
 
 const getUserFromLocalStorage = (): TUserSignInApiResponse | null => {
@@ -8,7 +9,7 @@ const getUserFromLocalStorage = (): TUserSignInApiResponse | null => {
 
 export const PrepareTypicalAuthUserHeaders = (
   headers: Headers,
-  //@ts-ignore
+  // @ts-ignore
   { getState }: Pick<BaseQueryApi, 'getState' | 'extra' | 'endpoint' | 'type' | 'forced'>
 ) => {
   const user = getUserFromLocalStorage();

@@ -2,8 +2,9 @@ import { Layout } from 'antd/es';
 import { ReactElement, Suspense } from 'react';
 import { BrowserRouter } from 'react-router-dom';
 
-import Routing from '../../../routing';
 import { Loader } from '@shared/ui';
+
+import Routing from '../../../routing';
 
 export const NoAuthLayout = (): ReactElement => (
   <BrowserRouter>

@@ -1,6 +1,6 @@
-import React, { ErrorInfo, ReactNode } from "react";
+import React, { ErrorInfo, ReactNode } from 'react';
 
-import { NotFound } from "@pages/NotFound";
+import { NotFound } from '@pages/NotFound';
 
 interface ErrorBoundaryProps {
   children: ReactNode;
@@ -10,10 +10,7 @@ interface IErrorBoundaryState {
   hasError: boolean;
 }
 
-class ErrorBoundary extends React.Component<
-  ErrorBoundaryProps,
-  IErrorBoundaryState
-> {
+class ErrorBoundary extends React.Component<ErrorBoundaryProps, IErrorBoundaryState> {
   constructor(props: ErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false };

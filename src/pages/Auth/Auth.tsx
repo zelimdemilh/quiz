@@ -1,16 +1,15 @@
-import { FC, useEffect, useState } from 'react';
 import type { FormProps } from 'antd';
 import { Button, Form, Input } from 'antd';
 import { useForm } from 'antd/es/form/Form';
-import { Link, useNavigate } from 'react-router-dom';
+import { FC, useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 
 import { useUserSignInMutation } from '@shared/api';
 import { Page } from '@shared/ui';
 
 export const Auth: FC = () => {
   const [error, setError] = useState<string | null>(null);
-  const [userSignIn, { error: resError, isSuccess }] = useUserSignInMutation();
-  const navigate = useNavigate();
+  const [userSignIn, { error: resError }] = useUserSignInMutation();
   const [form] = useForm();
 
   const onFinish: FormProps['onFinish'] = async () => {
@@ -18,12 +17,6 @@ export const Auth: FC = () => {
     await userSignIn(values).unwrap();
     setError(null);
   };
-
-  useEffect(() => {
-    if (isSuccess) {
-      navigate('/');
-    }
-  }, [isSuccess, navigate]);
 
   useEffect(() => {
     // @ts-ignore

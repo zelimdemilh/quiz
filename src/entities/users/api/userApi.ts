@@ -1,9 +1,13 @@
 import { userService } from '@shared/api';
 import { buildSlice } from '@shared/lib/store';
 
+import { IUserStateSchema } from '../lib/@types';
 import { INITIAL_USER_STATE, USER_STORE_NAME } from '../lib/conts';
 
-const initialState = INITIAL_USER_STATE;
+const userDataLocalStorage = localStorage.getItem('user');
+const userData = userDataLocalStorage ? (JSON.parse(userDataLocalStorage) as IUserStateSchema) : null;
+
+const initialState = userData || INITIAL_USER_STATE;
 
 const userSlice = buildSlice({
   name: USER_STORE_NAME,
